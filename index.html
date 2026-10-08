@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6b9d">
+
+<title>Happy Birthday Shreya 🎂🐼</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #8e7dff);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ---------- OPENING ---------- */
+
+#opening {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #8e7dff);
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#opening.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.opening-box {
+    width: min(90%, 420px);
+    padding: 32px 24px;
+    text-align: center;
+    background: rgba(255,255,255,0.17);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: popIn 1s ease;
+}
+
+.panda {
+    font-size: 85px;
+    animation: pandaBounce 1.8s infinite;
+    margin-bottom: 12px;
+}
+
+.opening-box h1 {
+    font-size: 29px;
+    margin-bottom: 8px;
+}
+
+.opening-box p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 23px;
+}
+
+.open-btn {
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    background: white;
+    color: #ff4f87;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* ---------- MAIN ---------- */
+
+#main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+    position: relative;
+}
+
+.wish-card {
+    position: relative;
+    z-index: 10;
+    width: min(100%, 500px);
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 28px 22px;
+    text-align: center;
+
+    background: rgba(255,255,255,0.17);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+
+    animation: cardAppear 1.2s ease;
+}
+
+.small-title {
+    font-size: 15px;
+    opacity: 0.85;
+    margin-bottom: 5px;
+}
+
+.card-panda {
+    font-size: 58px;
+    animation: pandaBounce 2s infinite;
+    margin-bottom: 4px;
+}
+
+.wish-card h1 {
+    font-size: clamp(30px, 8vw, 46px);
+    margin-bottom: 18px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.message {
+    background: rgba(255,255,255,0.14);
+    padding: 22px 18px;
+    border-radius: 22px;
+    line-height: 1.7;
+    font-size: 16px;
+    text-align: left;
+}
+
+.message .hello {
+    text-align: center;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.message p {
+    margin-bottom: 15px;
+}
+
+.message .final {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.name {
+    margin-top: 18px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* ---------- PANDA ---------- */
+
+.panda-badge {
+    display: inline-block;
+    margin: 15px auto 0;
+    padding: 9px 15px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.18);
+    font-size: 14px;
+}
+
+.floating-panda {
+    position: fixed;
+    z-index: 3;
+    pointer-events: none;
+    font-size: 40px;
+    animation: pandaFloat 7s ease-in-out infinite;
+}
+
+.panda-one {
+    left: 4%;
+    top: 20%;
+}
+
+.panda-two {
+    right: 4%;
+    bottom: 18%;
+    animation-delay: 2s;
+}
+
+/* ---------- MUSIC ---------- */
+
+#musicBtn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 50;
+
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.25);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+/* ---------- BALLOONS ---------- */
+
+.balloon {
+    position: fixed;
+    bottom: -120px;
+    font-size: 50px;
+    z-index: 1;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+}
+
+.balloon:nth-child(1) {
+    left: 5%;
+    animation-duration: 10s;
+}
+
+.balloon:nth-child(2) {
+    left: 25%;
+    animation-duration: 13s;
+    animation-delay: 3s;
+}
+
+.balloon:nth-child(3) {
+    right: 20%;
+    animation-duration: 11s;
+    animation-delay: 1s;
+}
+
+.balloon:nth-child(4) {
+    right: 5%;
+    animation-duration: 14s;
+    animation-delay: 5s;
+}
+
+/* ---------- HEARTS ---------- */
+
+.heart {
+    position: fixed;
+    bottom: -50px;
+    z-index: 2;
+    pointer-events: none;
+    animation: heartFloat linear infinite;
+    opacity: 0.8;
+}
+
+/* ---------- CONFETTI ---------- */
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 8px;
+    height: 14px;
+    z-index: 200;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes popIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        transform: translateY(40px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pandaBounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+}
+
+@keyframes pandaFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-8deg);
+    }
+    50% {
+        transform: translateY(-25px) rotate(8deg);
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(-5deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 500px) {
+
+    #main {
+        padding: 18px 12px;
+    }
+
+    .wish-card {
+        padding: 24px 16px;
+        border-radius: 25px;
+        max-height: 90vh;
+    }
+
+    .card-panda {
+        font-size: 52px;
+    }
+
+    .message {
+        font-size: 15px;
+        padding: 18px 15px;
+        line-height: 1.65;
+    }
+
+    .message .hello {
+        font-size: 21px;
+    }
+
+    .balloon {
+        font-size: 38px;
+    }
+
+    .floating-panda {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPENING -->
+
+<div id="opening">
+
+    <div class="opening-box">
+
+        <div class="panda">🐼</div>
+
+        <h1>A Little Birthday Surprise 🎁</h1>
+
+        <p>
+            A very important panda has something to say... 👀
+        </p>
+
+        <button class="open-btn" onclick="openSurprise()">
+            Open It 🎀
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<main id="main">
+
+    <!-- Floating pandas -->
+    <div class="floating-panda panda-one">🐼</div>
+    <div class="floating-panda panda-two">🐼</div>
+
+    <!-- Balloons -->
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+
+    <!-- Birthday Card -->
+
+    <div class="wish-card">
+
+        <div class="small-title">
+            🐼 Official Panda Birthday Department 🐼
+        </div>
+
+        <div class="card-panda">🐼</div>
+
+        <div class="cake">🎂</div>
+
+        <h1>
+            Happy Birthdayyy! ✨
+        </h1>
+
+        <div class="message">
+
+            <div class="hello">
+                Hey Chan! 🫶
+            </div>
+
+            <p>
+                🎂 Happy Birthdayyy! ✨
+            </p>
+
+            <p>
+                Hope you have the happiest day and an amazing year ahead.
+            </p>
+
+            <p>
+                Stay the same cute, chaotic, wonderful person you are. 😂🫶
+            </p>
+
+            <p>
+                I hope this year brings you lots of happiness,
+                good memories, laughter, and everything you deserve. ✨
+            </p>
+
+            <p class="final">
+                Happy Birthday again, Panda! 🐼🎂❤️
+            </p>
+
+        </div>
+
+        <div class="panda-badge">
+            🐼 Panda-approved birthday wishes ✨
+        </div>
+
+        <div class="name">
+            — For Shreya ❤️
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- MUSIC -->
+
+<button id="musicBtn" onclick="toggleMusic()" aria-label="Toggle music">
+    🎵
+</button>
+
+
+<script>
+
+/* ---------- BIRTHDAY MUSIC ---------- */
+
+let audioContext = null;
+let musicPlaying = false;
+let musicTimer = null;
+let currentNote = 0;
+
+const melody = [
+    [523.25, 0.30],
+    [659.25, 0.30],
+    [783.99, 0.40],
+    [659.25, 0.30],
+
+    [587.33, 0.30],
+    [698.46, 0.30],
+    [880.00, 0.40],
+    [698.46, 0.30],
+
+    [523.25, 0.30],
+    [659.25, 0.30],
+    [783.99, 0.50],
+    [880.00, 0.40],
+
+    [783.99, 0.30],
+    [659.25, 0.30],
+    [523.25, 0.60]
+];
+
+function startMusic() {
+
+    if (musicPlaying) return;
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+    if (!AudioContext) return;
+
+    if (!audioContext) {
+        audioContext = new AudioContext();
+    }
+
+    audioContext.resume();
+
+    musicPlaying = true;
+    document.getElementById("musicBtn").innerHTML = "🔊";
+
+    playNextNote();
+}
+
+function playNextNote() {
+
+    if (!musicPlaying) return;
+
+    const note = melody[currentNote];
+
+    const frequency = note[0];
+    const duration = note[1];
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    const now = audioContext.currentTime;
+
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.07, now + 0.03);
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        now + duration
+    );
+
+    oscillator.start(now);
+    oscillator.stop(now + duration);
+
+    currentNote++;
+
+    if (currentNote >= melody.length) {
+        currentNote = 0;
+    }
+
+    musicTimer = setTimeout(
+        playNextNote,
+        duration * 1000 + 40
+    );
+}
+
+function stopMusic() {
+
+    musicPlaying = false;
+
+    clearTimeout(musicTimer);
+
+    document.getElementById("musicBtn").innerHTML = "🔇";
+
+    if (audioContext) {
+        audioContext.suspend();
+    }
+}
+
+function toggleMusic() {
+
+    if (musicPlaying) {
+        stopMusic();
+    } else {
+        startMusic();
+    }
+
+}
+
+
+/* ---------- OPEN SURPRISE ---------- */
+
+function openSurprise() {
+
+    document.getElementById("opening")
+        .classList.add("hide");
+
+    startMusic();
+
+    createConfetti();
+
+    createHearts();
+}
+
+
+/* ---------- CONFETTI ---------- */
+
+function createConfetti() {
+
+    const symbols = [
+        "🎉",
+        "✨",
+        "🎊",
+        "💖",
+        "⭐",
+        "💕",
+        "🐼"
+    ];
+
+    for (let i = 0; i < 80; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.innerHTML =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.fontSize =
+            (10 + Math.random() * 14) + "px";
+
+        piece.style.animationDuration =
+            (2 + Math.random() * 4) + "s";
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 7000);
+    }
+}
+
+
+/* ---------- FLOATING HEARTS ---------- */
+
+function createHearts() {
+
+    const hearts = [
+        "❤️",
+        "💕",
+        "💖",
+        "💗",
+        "💓"
+    ];
+
+    setInterval(() => {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerHTML =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 20) + "px";
+
+        heart.style.animationDuration =
+            (5 + Math.random() * 5) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 10000);
+
+    }, 1000);
+}
+
+</script>
+
+</body>
+</html>
